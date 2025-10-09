@@ -1,0 +1,23 @@
+Start testing: Sep 18 16:00 EDT
+----------------------------------------------------------
+1/1 Testing: my_test
+1/1 Test: my_test
+Command: "/home/andre/P1/build/my_test"
+Directory: /home/andre/P1/build
+"my_test" start time: Sep 18 16:00 EDT
+Output:
+----------------------------------------------------------
+
++++  Files "run_mpi_1proc.out" and "run_mpi_2proc.out" are equal
+===============================================================================
+All tests passed (3 assertions in 1 test case)
+
+<end of output>
+Test time =   2.84 sec
+----------------------------------------------------------
+Test Passed.
+"my_test" end time: Sep 18 16:00 EDT
+"my_test" time elapsed: 00:00:02
+----------------------------------------------------------
+
+End testing: Sep 18 16:00 EDT
