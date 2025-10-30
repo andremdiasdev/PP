@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
         const double *r = x[j];
         for (int i = 0; i < imax; ++i)
         {
-            if (r[i] != 0.0)
+            if (r[i] != 5.0)
             {
                 nz = 1;
                 break;
