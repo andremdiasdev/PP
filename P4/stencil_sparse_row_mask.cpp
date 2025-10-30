@@ -103,8 +103,6 @@ int main(int argc, char *argv[])
         // ---------- START SPARSE ROW-MASKED STENCIL OPERATION ----------
         for (int j = 0; j < jmax; j++)
         {
-
-            // enforce top/bottom = 0 always
             if (j == 0 || j == jmax - 1)
             {
                 for (int i = 0; i < imax; i++)
