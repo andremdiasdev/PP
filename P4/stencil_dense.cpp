@@ -92,7 +92,6 @@ int main(int argc, char *argv[])
             }
         }
 
-        // optional: zero out physical boundary so it doesn't accumulate junk
         for (int i = 0; i < imax; i++)
         {
             xnew[0][i] = 0.0;
