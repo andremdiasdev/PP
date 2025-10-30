@@ -53,8 +53,8 @@ smemroofs = [141.6, 95.1, 66.5, 37.6, 31.0, 29.3]
 scomproofs = [8.9]
 smem_roof_name = ["L1 Bandwidth", "L2 Bandwidth", "L3 Bandwidth", "L4 Bandwidth", "L5 Bandwidth", "DRAM Bandwidth"]
 scomp_roof_name = ["FP64 Maximum"]
-AI = [0.2363, 0.2102]
-FLOPS = [5.65, 2.308]
+AI = [0.1163, 0.1760]
+FLOPS = [14.31, 2.333]
 labels = ["CloverLeaf w/OpenMP and Vectorization", "CloverLeaf Serial"]
 
 print('memroofs', smemroofs)
