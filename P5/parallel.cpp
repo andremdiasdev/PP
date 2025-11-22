@@ -74,7 +74,7 @@ int main()
 
     auto t_init_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> init_time = t_init_end - t_init_start;
-    std::cout << "\nInitialization time: " << init_time.count() << "  ";
+    std::cout << "\nInitialization time: " << init_time.count() << "\n";
     ;
 
     /************ Stencil timing (hash-based neighbors on cells) ************/
@@ -125,7 +125,7 @@ int main()
 
     auto t_stencil_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> stencil_time = t_stencil_end - t_stencil_start;
-    std::cout << "Stencil computation time (hash-based): " << stencil_time.count();
+    std::cout << "Stencil computation time (hash-based): " << stencil_time.count()<<"\n";
 
 /************ Scatter cell values back to fine grid for printing ************/
 // TODO(OpenMP): optional parallelization (independent writes).
