@@ -80,52 +80,52 @@ int main()
     /************ Stencil timing (hash-based neighbors on cells) ************/
     const int ITER = 100000;
     auto t_stencil_start = std::chrono::high_resolution_clock::now();
-    // TODO(OpenMP): define the parallel region
-    for (int iter = 0; iter < ITER; ++iter)
+// TODO(OpenMP): define the parallel region
+#pragma omp parallel
     {
-
-// Typical pattern:
-// TODO(OpenMP): // parallelize the per-iteration update across cells.
-#pragma omp parallel for
-        for (int ic = 0; ic < ncells; ++ic)
+        for (int iter = 0; iter < ITER; ++iter)
         {
-            // TODO(Stencils): stencil update body (parallel-safe; only reads x_cell and writes xnew_cell[ic])
-            double sum = x_cell[ic];
-            int count = 1;
-            if (neigh[ic].left >= 0)
+#pragma omp for
+            for (int ic = 0; ic < ncells; ++ic)
             {
-                sum += x_cell[neigh[ic].left];
-                ++count;
+                // TODO(Stencils): stencil update body (parallel-safe; only reads x_cell and writes xnew_cell[ic])
+                double sum = x_cell[ic];
+                int count = 1;
+                if (neigh[ic].left >= 0)
+                {
+                    sum += x_cell[neigh[ic].left];
+                    ++count;
+                }
+                if (neigh[ic].right >= 0)
+                {
+                    sum += x_cell[neigh[ic].right];
+                    ++count;
+                }
+                if (neigh[ic].bot >= 0)
+                {
+                    sum += x_cell[neigh[ic].bot];
+                    ++count;
+                }
+                if (neigh[ic].top >= 0)
+                {
+                    sum += x_cell[neigh[ic].top];
+                    ++count;
+                }
+                xnew_cell[ic] = sum / (double)count;
             }
-            if (neigh[ic].right >= 0)
-            {
-                sum += x_cell[neigh[ic].right];
-                ++count;
-            }
-            if (neigh[ic].bot >= 0)
-            {
-                sum += x_cell[neigh[ic].bot];
-                ++count;
-            }
-            if (neigh[ic].top >= 0)
-            {
-                sum += x_cell[neigh[ic].top];
-                ++count;
-            }
-            xnew_cell[ic] = sum / (double)count;
-        }
 
-        // TODO(OpenMP): a barrier is implicit at end of 'parallel for' unless 'nowait' used.
-        // Swap pointers (serial op; keep outside parallel region).
-        double *tmp = x_cell;
-        x_cell = xnew_cell;
-        xnew_cell = tmp;
-        // TODO(OpenMP): if you keep the parallel region open, use single/master for swap.
+#pragma omp single
+            {
+                double *tmp = x_cell;
+                x_cell = xnew_cell;
+                xnew_cell = tmp;
+            }
+        }
     }
 
     auto t_stencil_end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> stencil_time = t_stencil_end - t_stencil_start;
-    std::cout << "Stencil computation time (hash-based): " << stencil_time.count()<<"\n";
+    std::cout << "Stencil computation time (hash-based): " << stencil_time.count() << "\n";
 
 /************ Scatter cell values back to fine grid for printing ************/
 // TODO(OpenMP): optional parallelization (independent writes).
