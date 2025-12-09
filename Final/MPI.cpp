@@ -29,9 +29,9 @@ int main(int argc, char** argv) {
     //Print rank, local_val, global_sum, and global_max, e.g.:
     //Rank X: local = ..., sum = ..., max = ...
     std::cout << "Rank " << rank
-    << ": local = " << local_val
-    << ", sum = " << global_sum
-    << ", max = " << global_max
+    << ": local_val = " << local_val
+    << ", global_sum = " << global_sum
+    << ", global_max = " << global_max
     << std::endl;
 
     //TODO 5:
